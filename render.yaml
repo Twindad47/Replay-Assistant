@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: replay-assistant-beta
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+# Optional TURN environment variables can be added later in the Render Dashboard:
+# TURN_URLS, TURN_USERNAME, TURN_CREDENTIAL
+# Multiple TURN_URLS are separated with commas.

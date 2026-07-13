@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replay Assistant Camera</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="camera-page">
+  <main class="phone-camera-shell">
+    <a href="index.html" aria-label="Replay Assistant home">
+      <img src="assets/replay-assistant-logo.png" alt="Replay Assistant" class="camera-page-logo">
+    </a>
+    <span class="beta-badge">Online Beta</span>
+
+    <section id="cameraJoinPanel" class="camera-join-panel is-hidden">
+      <h1>Join a Private Session</h1>
+      <p>Enter the session code shown on the coach’s controller.</p>
+      <label for="cameraSessionInput">Session Code</label>
+      <input id="cameraSessionInput" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="ABC123">
+      <button id="joinCameraSessionButton" class="button button-primary" type="button">Join Session</button>
+      <p id="cameraJoinError" class="form-error" role="alert"></p>
+    </section>
+
+    <section id="cameraControlPanel" class="is-hidden">
+      <div class="camera-session-heading">
+        <div>
+          <span>Private Session</span>
+          <strong id="cameraSessionCode">------</strong>
+        </div>
+        <span id="cameraSocketStatus" class="connection-badge is-connecting">Connecting</span>
+      </div>
+
+      <h1 id="assignedCameraName">Remote Camera</h1>
+      <video id="cameraPreview" autoplay muted playsinline></video>
+
+      <label class="camera-consent-row">
+        <input id="recordingConsent" type="checkbox">
+        <span>I have permission to record the athlete(s) visible to this camera.</span>
+      </label>
+
+      <button id="startRemoteCameraButton" class="button button-primary" aria-pressed="false" disabled>Start Camera</button>
+      <p id="cameraPageStatus">Confirm permission, then tap Start Camera.</p>
+
+      <div class="camera-privacy-note">
+        <strong>Privacy-first beta</strong>
+        <p>The camera stream is sent to controllers in this private session. Saved replays remain on the controller device unless downloaded.</p>
+        <a href="privacy.html" target="_blank" rel="noopener">Read the beta privacy notice</a>
+      </div>
+    </section>
+  </main>
+
+  <a id="cameraFeedbackLink" class="floating-feedback-link" href="feedback.html">Beta Feedback</a>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="js/cameraSender.js"></script>
+</body>
+</html>

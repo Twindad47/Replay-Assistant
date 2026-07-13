@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replay Assistant Beta Feedback</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="information-page">
+  <header class="information-topbar">
+    <a class="brand-chip" href="index.html">
+      <img src="assets/replay-assistant-logo.png" alt="">
+      <span><strong>Replay Assistant</strong><small>Record. Review. Improve.</small></span>
+    </a>
+    <span class="beta-badge">Online Beta</span>
+  </header>
+
+  <main class="information-shell feedback-shell">
+    <p class="eyebrow">BETA FEEDBACK</p>
+    <h1>Help Us Improve Replay Assistant</h1>
+    <p class="information-lead">Tell us what worked, what was confusing, and what your athletes or coaches would like next.</p>
+
+    <form id="feedbackForm" class="feedback-form">
+      <label>
+        <span>Sport</span>
+        <select id="feedbackSport" name="sport">
+          <option>Gymnastics</option>
+          <option>Baseball</option>
+          <option>Basketball</option>
+          <option>Soccer</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Overall experience</span>
+        <select id="feedbackRating" name="rating">
+          <option value="Excellent">Excellent</option>
+          <option value="Good">Good</option>
+          <option value="Needs work">Needs work</option>
+          <option value="Could not complete testing">Could not complete testing</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Comments</span>
+        <textarea id="feedbackComments" name="comments" rows="8" required maxlength="4000" placeholder="What happened? What did you like? What should change?"></textarea>
+      </label>
+
+      <label>
+        <span>Optional contact information</span>
+        <input id="feedbackContact" name="contact" type="text" maxlength="200" placeholder="Email or phone, only if you want a reply">
+      </label>
+
+      <button id="feedbackSubmitButton" type="submit" class="button button-primary">Send Beta Feedback</button>
+      <p id="feedbackStatus" class="feedback-status" role="status"></p>
+    </form>
+
+    <p class="feedback-privacy-copy">Please do not include athlete medical details, private school information, or other sensitive information.</p>
+  </main>
+
+  <script type="module" src="js/feedback.js"></script>
+</body>
+</html>

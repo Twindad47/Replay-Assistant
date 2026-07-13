@@ -1,0 +1,22 @@
+{
+  "name": "replay-assistant",
+  "version": "0.6.0",
+  "private": true,
+  "description": "Online beta multi-sport replay platform with private sessions, QR camera joining, multi-angle WebRTC recording, and in-replay coaching tools.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replay Assistant • Baseball</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="sport-page sport-baseball" data-replay-title="Baseball Replay Assistant">
+  <header class="sport-topbar">
+    <a class="brand-chip" href="index.html" aria-label="Replay Assistant home page">
+      <img src="assets/replay-assistant-logo.png" alt="">
+      <span>
+        <strong>Replay Assistant</strong>
+        <small>Record. Review. Improve.</small>
+      </span>
+    </a>
+    <span class="beta-badge">Online Beta</span>
+
+    <nav class="sport-switcher" aria-label="Sport pages">
+
+      <a href="gymnastics.html" class="sport-switcher-link ">Gymnastics</a>
+      <a href="baseball.html" class="sport-switcher-link active">Baseball</a>
+      <a href="basketball.html" class="sport-switcher-link ">Basketball</a>
+      <a href="soccer.html" class="sport-switcher-link ">Soccer</a>
+      <a href="?mode=coach" class="coach-mode-link" data-coach-mode-link>Coach Controller</a>
+    </nav>
+  </header>
+
+  <header class="hero-banner" aria-label="Replay Assistant • Baseball">
+    <img
+      src="assets/replay-assistant-baseball-banner.png"
+      alt="Replay Assistant baseball header with a batter swinging and two phones capturing different angles."
+      class="hero-banner-image"
+      width="1546"
+      height="423">
+  </header>
+
+  <main class="dashboard">
+    <aside class="sidebar">
+      <section class="panel controls-panel">
+        <h2>Session</h2>
+
+
+        <section class="private-session-card" aria-labelledby="privateSessionHeading">
+          <div class="private-session-heading">
+            <div>
+              <span id="privateSessionHeading">Private Session</span>
+              <strong id="sessionCodeDisplay">------</strong>
+            </div>
+            <span id="socketStatus" class="connection-badge is-connecting">Connecting</span>
+          </div>
+
+          <p>Only controllers and cameras using this session code can connect together.</p>
+
+          <div class="session-share-layout">
+            <img id="sessionQrImage" class="session-qr-image" alt="QR code for joining this private camera session">
+            <div class="session-share-actions">
+              <code id="coachCameraUrl"></code>
+              <button id="copySessionCodeButton" type="button">Copy Session Code</button>
+              <button id="copyCameraLinkButton" type="button">Copy Camera Link</button>
+              <button id="newSessionButton" type="button">New Session</button>
+            </div>
+          </div>
+        </section>
+
+        <div id="coachModeNotice" class="coach-mode-notice is-hidden">
+          <strong>Coach Controller Mode</strong>
+          <p>This device controls recording, replay, and saving without using its own camera.</p>
+        </div>
+
+        <aside id="privacyNotice" class="privacy-notice">
+          <div>
+            <strong>Online Beta Privacy</strong>
+            <p>Saved replays stay on this controller device. Record athletes only with permission.</p>
+          </div>
+          <div class="privacy-notice-actions">
+            <a href="privacy.html" target="_blank" rel="noopener">Details</a>
+            <button id="dismissPrivacyNotice" type="button">Got It</button>
+          </div>
+        </aside>
+
+        <label class="session-field">
+          <span>Athlete</span>
+          <input id="sessionGymnast" type="text" placeholder="Athlete name">
+        </label>
+
+        <label class="session-field">
+          <span>Event</span>
+          <select id="sessionEvent">
+            <option>Hitting</option>
+            <option>Pitching</option>
+            <option>Fielding</option>
+            <option>Catching</option>
+            <option>Throwing</option>
+            <option>Base Running</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <button id="startAttemptButton" class="button button-primary" disabled>⏺ Record</button>
+        <button id="replayButton" class="button button-secondary" disabled>▶ Replay</button>
+
+        <div class="control-group">
+          <h3>Recording Controls</h3>
+
+          <label for="recordingLength">Recording Length</label>
+          <select id="recordingLength">
+            <option value="5">5 seconds</option>
+            <option value="10" selected>10 seconds</option>
+            <option value="15">15 seconds</option>
+            <option value="20">20 seconds</option>
+          </select>
+        </div>
+
+        <button id="startCameraButton" class="button button-primary" aria-pressed="false">Start Camera 1</button>
+        <button id="saveReplayButton" class="button button-primary" disabled>💾 Save Replay</button>
+
+        <div id="countdown" class="countdown" aria-live="polite"></div>
+        <p id="appStatus" class="app-status">Start Camera 1 to begin.</p>
+      </section>
+
+      <section class="panel storage-panel">
+        <div class="storage-heading">
+          <h2>Storage Used</h2>
+          <span id="storageStatus">Calculating…</span>
+        </div>
+        <div class="storage-track"><span></span></div>
+        <button id="persistStorageButton" class="button button-secondary">Protect Storage</button>
+      </section>
+    </aside>
+
+    <section class="content-column">
+      <section class="panel camera-panel">
+        <div class="section-heading">
+          <div>
+            <h2>Camera Inputs</h2>
+            <p>Click a camera name to rename it.</p>
+          </div>
+
+          <span id="recordingStatus" class="status-pill">Ready</span>
+        </div>
+        <div id="cameraGrid" class="camera-grid"></div>
+      </section>
+
+      <section class="panel gallery-section">
+        <div class="section-heading">
+          <div>
+            <h2>Saved Replays</h2>
+            <p>Saved on this controller device.</p>
+          </div>
+        </div>
+        <div id="emptyGallery" class="empty-gallery">No saved replays yet.</div>
+        <div id="replayGallery" class="replay-gallery"></div>
+      </section>
+    </section>
+  </main>
+
+  <canvas id="recordingCanvas" width="1920" height="1080" hidden></canvas>
+
+  <dialog id="saveReplayDialog" class="replay-dialog">
+    <form id="saveReplayForm">
+      <h2>Save Replay</h2>
+      <label for="replayName">Replay Name</label>
+      <input id="replayName" required maxlength="100">
+      <label for="gymnastName">Athlete</label>
+      <input id="gymnastName" maxlength="100">
+      <label for="replayNotes">Notes</label>
+      <textarea id="replayNotes" rows="4" maxlength="1000"></textarea>
+      <div class="dialog-actions">
+        <button id="cancelSaveReplay" type="button" class="button button-secondary">Cancel</button>
+        <button type="submit" class="button button-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="renameReplayDialog" class="replay-dialog">
+    <form id="renameReplayForm">
+      <h2>Rename Replay</h2>
+      <label for="renameReplayName">Replay Name</label>
+      <input id="renameReplayName" required maxlength="100">
+      <label for="renameGymnastName">Athlete</label>
+      <input id="renameGymnastName" maxlength="100">
+      <label for="renameReplayNotes">Notes</label>
+      <textarea id="renameReplayNotes" rows="4" maxlength="1000"></textarea>
+      <div class="dialog-actions">
+        <button id="cancelRenameReplay" type="button" class="button button-secondary">Cancel</button>
+        <button type="submit" class="button button-primary">Update</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="thumbnailDialog" class="replay-dialog thumbnail-dialog">
+    <form id="thumbnailForm">
+      <h2>Choose Thumbnail</h2>
+      <p class="thumbnail-picker-help">Drag the slider to the frame you want to use for this replay.</p>
+      <video id="thumbnailVideo" class="thumbnail-picker-video" muted playsinline preload="metadata"></video>
+      <label class="thumbnail-frame-label" for="thumbnailFrameRange">
+        <span>Thumbnail frame</span>
+        <output id="thumbnailTimeLabel">0:00 / 0:00</output>
+      </label>
+      <input id="thumbnailFrameRange" type="range" min="0" max="1" step="0.05" value="0">
+      <div class="dialog-actions">
+        <button id="cancelThumbnail" type="button" class="button button-secondary">Cancel</button>
+        <button id="saveThumbnail" type="submit" class="button button-primary">Use This Frame</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="countdownOverlay" class="countdown-overlay" aria-hidden="true">
+    <div id="countdownOverlayValue" class="countdown-overlay-value" aria-live="assertive"></div>
+  </div>
+
+  <a class="floating-feedback-link" data-feedback-link href="feedback.html">Beta Feedback</a>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
