@@ -7,7 +7,7 @@ const express = require("express");
 const QRCode = require("qrcode");
 const { Server } = require("socket.io");
 
-const APP_VERSION = "0.6.0";
+const APP_VERSION = "0.6.1";
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const publicDir = path.join(__dirname, "public");

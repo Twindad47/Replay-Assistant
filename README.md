@@ -1,6 +1,6 @@
-[README.md](https://github.com/user-attachments/files/29988398/README.md)[Uploading README.md…](# Replay Assistant
+# Replay Assistant
 
-Version 0.6.0 is the first hosted online beta of Replay Assistant, with private session codes, QR camera joining, reconnect support, and Render deployment files.
+Version 0.6.1 is the current hosted online beta of Replay Assistant, with private session codes, QR camera joining, reconnect support, and Render deployment files.
 
 ## Online beta
 
@@ -31,4 +31,3 @@ Open a replay and select the pencil button inside the replay window. Drawing mod
 - Clear
 
 Drawing works with a mouse, trackpad, finger, or Apple Pencil.
-)

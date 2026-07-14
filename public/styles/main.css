@@ -1292,3 +1292,127 @@ body.landing-page {
   .information-topbar { align-items: flex-start; }
   .information-actions .hero-button { width: 100%; }
 }
+
+/* v0.6.1 reference-matched homepage */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+body.reference-home-page {
+  margin: 0;
+  min-width: 320px;
+  background: #f7f8fa;
+  color: #17202a;
+}
+
+.reference-home-main {
+  width: min(1122px, 100%);
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 36px rgba(20, 38, 58, .08);
+}
+
+.reference-image-panel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.reference-image-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.reference-hotspot {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: box-shadow .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.reference-hotspot:hover {
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 0 0 3px rgba(255,255,255,.78), 0 8px 22px rgba(13,45,77,.22);
+  transform: translateY(-1px);
+}
+
+.reference-hotspot:focus-visible {
+  outline: 4px solid #ffd54a;
+  outline-offset: 3px;
+  background: rgba(255,255,255,.12);
+}
+
+/* Hero button and sport panel links, measured against the 1122 × 570 source artwork. */
+.hero-choose-hotspot { left: 4.1%; top: 84.8%; width: 16.2%; height: 7.7%; }
+.hero-how-hotspot { left: 21.15%; top: 84.8%; width: 12.25%; height: 7.7%; }
+.hero-gymnastics-hotspot { left: 35.2%; top: 0; width: 20.8%; height: 82%; border-radius: 0; }
+.hero-baseball-hotspot { left: 56%; top: 0; width: 16.5%; height: 82%; border-radius: 0; }
+.hero-basketball-hotspot { left: 72.5%; top: 0; width: 13.6%; height: 82%; border-radius: 0; }
+.hero-soccer-hotspot { left: 86.1%; top: 0; width: 13.9%; height: 82%; border-radius: 0; }
+
+/* Sport buttons, measured against the 1122 × 463 source artwork. */
+.sport-gymnastics-hotspot { left: 6.95%; top: 80.2%; width: 17.1%; height: 9.3%; }
+.sport-baseball-hotspot { left: 29.85%; top: 80.2%; width: 17.1%; height: 9.3%; }
+.sport-basketball-hotspot { left: 52.85%; top: 80.2%; width: 17.1%; height: 9.3%; }
+.sport-soccer-hotspot { left: 75.8%; top: 80.2%; width: 17.1%; height: 9.3%; }
+
+.reference-home-footer {
+  width: min(1122px, 100%);
+  margin: 0 auto;
+  padding: 17px 24px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border-top: 1px solid #e3e8ee;
+  background: #fff;
+  color: #687686;
+  font-size: 13px;
+}
+
+.reference-home-footer p { margin: 0; }
+.reference-home-footer nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.reference-home-footer a {
+  color: #123b63;
+  font-weight: 800;
+  text-decoration: none;
+}
+.reference-home-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .reference-home-main,
+  .reference-home-footer {
+    width: 100%;
+  }
+
+  .reference-home-footer {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .reference-hotspot:hover {
+    box-shadow: none;
+    transform: none;
+  }
+}
